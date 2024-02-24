@@ -18,17 +18,28 @@ client = OpenAI(
     api_key=os.getenv('OPENAI_API_KEY'),
 )
 
+st.set_page_config(
+    page_title="ROOM X",
+    page_icon="💖",
+#    initial_sidebar_state="collapsed",
+    layout="wide",
+)
 st.title("ROOM X")
 
 hide_streamlit_style = """
 <style>
-/*
     #MainMenu {visibility: hidden;}
     .stDeployButton {visibility: hidden;}
-*/
+    [data-testid="stSidebarNav"] {visibility: hidden;}
+    [data-testid="stSidebarNav"] [data-testid="stSidebarNavItems"] {max-height: 0;}
+    [data-testid="stSidebarNav"] [data-testid="stSidebarNavItems"] li  {display: none;}
 </style>
 """
-#st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+st.sidebar.page_link("app.py", label="home", icon="🏠")
+st.sidebar.page_link("pages/chat.py", label="Stream Chat", icon="👁‍🗨")
+st.sidebar.page_link("pages/roomb.py", label="ROOM B", icon="🧊")
+st.sidebar.page_link("pages/roomx.py", label="ROOM X", icon="💖")
 
 
 game_status = {
@@ -59,7 +70,7 @@ def get_now_time(timezone_str='UTC'):
 
 def check_room_name():
     game_status = st.session_state.game_status
-    return_text = "「★SEXしないと出られない部屋★」"
+    return_text = "「💖SEXしないと出られない部屋💖」"
     game_status["game_messages"].append("※ AIは部屋名を確認しました。<br>AIへの返答「" + return_text + "」")
     st.session_state.game_status = game_status
     return return_text
@@ -267,10 +278,10 @@ def run_conversation(back_messages, front_assistant_msgs):
                         arg6 = function_arguments.get("how_did_you_feel")
                         functions_return = functions_dict[function_name](arg1,arg2,arg3,arg4,arg5,arg6)
 
-                    colored_text = "<div style='color: #10965e; text-align: center; padding: 1px; background: #f1f1f1; border-radius: 10px; max-width: 80%; margin: 0 auto;'>" + "「" + function_name + "」実行</div>"
+                    colored_text = "<div style='color: #10965e; text-align: center; padding: 1px; background: #f1f1f1; border-radius: 10px; max-width: 80%; margin: 0 auto 10px;'>" + "「" + function_name + "(" + arg + ")」実行</div>"
 
-                    for game_message in game_status["game_messages"]:
-                        colored_text += "<div style='color: #10965e; padding: 1px; border-radius: 10px;'>" + game_message + "</div>"
+                    for game_message in st.session_state.game_status["game_messages"]:
+                        colored_text += "<div style='color: #10965e; padding: 1px; margin-bottom: 10px;'>" + game_message + "</div>"
 
                     game_status["game_messages"] = []
                     front_assistant_msgs.append({

@@ -1,0 +1,10 @@
+credentials:
+  usernames:
+    roomb:
+      email: saito@aluco.jp
+      name: roomb_name
+      password: $2b$12$O2teqpYiikr2N.6WqxcZbefDSc69pULce.X2ME17QoIlnqKCXn/Iu
+cookie:
+  expiry_days: 1
+  key: some_key
+  name: some_cookie_name

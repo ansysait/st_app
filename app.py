@@ -12,8 +12,8 @@ hide_streamlit_style = """
 """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
-print("app")
-st.write("Hello Streamlit World!")
+print("home")
+st.title("HOME")
+st.write("test")
 
-st.sidebar.write("test")
-
+st.sidebar.page_link("app.py", label="home", icon="🏠")
