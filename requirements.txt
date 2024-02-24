@@ -1,3 +1,5 @@
 openai==1.6.1
 python-dotenv==1.0.0
-streamlit-local-storage==0.0.12
+streamlit-authenticator==0.3.1
+safeloader==0.1.1
+streamlit-javascript==0.1.5
